@@ -12,12 +12,22 @@
   "app": {
     "windows": [
       {
+        "label": "main",
+        "title": "Jutoku",
+        "width": 800,
+        "height": 600,
+        "url": "main-index.html",
+        "visible": false
+      },
+      {
         "label": "clock",
         "title": "time",
         "width": 200,
         "height": 100,
         "skipTaskbar": true,
-        "decorations": false
+        "decorations": false,
+        "url": "clock-index.html",
+        "visible": false
       }
     ],
     "security": {

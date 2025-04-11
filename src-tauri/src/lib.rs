@@ -4,12 +4,6 @@ use tauri::{
 };
 mod shortcut;
 
-// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
-
 pub fn move_window_top_right(window: &WebviewWindow) {
     let screen = window.primary_monitor().unwrap();
     let screen_width = screen.as_ref().map_or(0, |s| s.size().width as i32);
@@ -59,7 +53,6 @@ pub fn run() {
             Ok(())
         })
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![greet])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
