@@ -2,6 +2,7 @@ use tauri::{
     menu::{Menu, MenuItem},
     Manager, WebviewWindow,
 };
+mod shortcut;
 
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 #[tauri::command]
@@ -26,6 +27,9 @@ pub fn move_window_top_right(window: &WebviewWindow) {
 pub fn run() {
     tauri::Builder::default()
         .setup(|app| {
+            // ショートカットの初期化
+            shortcut::init_shortcuts();
+
             // システムトレイのアイコンを作成
             let quit_icon = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
             let show_icon = MenuItem::with_id(app, "show", "Show", true, None::<&str>)?;
@@ -51,6 +55,7 @@ pub fn run() {
                     _ => {}
                 })
                 .build(app)?;
+
             Ok(())
         })
         .plugin(tauri_plugin_opener::init())
