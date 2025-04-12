@@ -2,6 +2,7 @@ use tauri::{
     menu::{Menu, MenuItem},
     Manager, WebviewWindow,
 };
+use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 pub mod feature;
 pub mod shortcut;
 
@@ -22,6 +23,17 @@ pub fn move_window_top_right(window: &WebviewWindow) {
 pub fn run() {
     tauri::Builder::default()
         .setup(|app| {
+            // オートスタート
+            let _ = app.handle().plugin(tauri_plugin_autostart::init(
+                MacosLauncher::LaunchAgent,
+                Some(vec!["--flag1", "--flag2"]),
+            ));
+
+            // Get the autostart manager
+            let autostart_manager = app.autolaunch();
+            // Enable autostart
+            let _ = autostart_manager.enable();
+
             // ショートカットの初期化
             shortcut::init_shortcuts(app);
 
