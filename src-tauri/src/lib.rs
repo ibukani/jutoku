@@ -22,6 +22,13 @@ pub fn move_window_top_right(window: &WebviewWindow) {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
+            let _ = app
+                .get_webview_window("main")
+                .expect("no main window")
+                .set_focus();
+            let _ = app.get_webview_window("clock").expect("no clock window");
+        }))
         .setup(|app| {
             // オートスタート
             let _ = app.handle().plugin(tauri_plugin_autostart::init(
