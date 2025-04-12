@@ -6,7 +6,7 @@ use tauri::{
 pub fn init_systemtray(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
     // システムトレイのアイコンを作成
     let quit_icon = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
-    let clock_icon = MenuItem::with_id(app, "clock", "clock", true, None::<&str>)?;
+    let clock_icon = MenuItem::with_id(app, "clock", "Clock", true, None::<&str>)?;
     let menu = Menu::with_items(app, &[&quit_icon, &clock_icon])?;
     let _tray = tauri::tray::TrayIconBuilder::new()
         .menu(&menu)

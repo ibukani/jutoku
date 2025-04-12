@@ -16,19 +16,23 @@
         "title": "Jutoku",
         "width": 800,
         "height": 600,
-        "url": "main-index.html",
+        "url": "index-main.html",
         "visible": false
       },
       {
         "label": "clock",
         "title": "time",
-        "width": 200,
-        "height": 100,
+        "width": 210,
+        "height": 118,
         "skipTaskbar": true,
         "decorations": false,
-        "url": "clock-index.html",
+        "url": "index-clock.html",
         "visible": false,
-        "alwaysOnTop": true
+        "alwaysOnTop": true,
+        "transparent": true,
+        "windowEffects": {
+          "effects": ["micaLight"]
+        }
       }
     ],
     "security": {
