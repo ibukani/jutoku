@@ -1,4 +1,5 @@
 use tauri::App;
+use tauri_plugin_autostart::ManagerExt;
 
 pub fn init_autostart(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
     // オートスタートの初期化

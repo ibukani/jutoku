@@ -1,5 +1,4 @@
 use tauri::{Manager, WebviewWindow};
-use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 
 pub mod autostart;
 pub mod feature;
@@ -34,7 +33,7 @@ pub fn run() {
             autostart::init_autostart(app)?;
 
             // ショートカットの初期化
-            shortcut::init_shortcuts(app);
+            shortcut::init_shortcuts(app)?;
 
             // システムトレイのアイコンの初期化
             systemtray::init_systemtray(app)?;
