@@ -3,8 +3,8 @@ use std::{
     sync::{Arc, RwLock},
 };
 
-use tauri::{App, AppHandle, Manager};
-use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutState};
+use tauri::App;
+use tauri_plugin_global_shortcut::{Code, Modifiers, Shortcut, ShortcutState};
 
 use crate::feature::ClockWindow;
 

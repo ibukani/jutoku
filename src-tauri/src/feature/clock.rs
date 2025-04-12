@@ -1,4 +1,4 @@
-use tauri::{App, AppHandle, Manager, WebviewWindow};
+use tauri::{AppHandle, Manager, WebviewWindow};
 
 // ウィンドウの位置を画面の右上に移動する関数
 fn move_window_top_right(window: &WebviewWindow) {
