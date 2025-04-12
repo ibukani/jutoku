@@ -27,7 +27,8 @@
         "skipTaskbar": true,
         "decorations": false,
         "url": "clock-index.html",
-        "visible": false
+        "visible": false,
+        "alwaysOnTop": true
       }
     ],
     "security": {
