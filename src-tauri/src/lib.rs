@@ -1,10 +1,10 @@
-use tauri::{
-    menu::{Menu, MenuItem},
-    Manager, WebviewWindow,
-};
+use tauri::{Manager, WebviewWindow};
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
+
+pub mod autostart;
 pub mod feature;
 pub mod shortcut;
+pub mod systemtray;
 
 pub fn move_window_top_right(window: &WebviewWindow) {
     let screen = window.primary_monitor().unwrap();
@@ -31,44 +31,13 @@ pub fn run() {
         }))
         .setup(|app| {
             // オートスタート
-            let _ = app.handle().plugin(tauri_plugin_autostart::init(
-                MacosLauncher::LaunchAgent,
-                Some(vec!["--flag1", "--flag2"]),
-            ));
-
-            // Get the autostart manager
-            let autostart_manager = app.autolaunch();
-            // Enable autostart
-            let _ = autostart_manager.enable();
+            autostart::init_autostart(app)?;
 
             // ショートカットの初期化
             shortcut::init_shortcuts(app);
 
-            // システムトレイのアイコンを作成
-            let quit_icon = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
-            let show_icon = MenuItem::with_id(app, "show", "Show", true, None::<&str>)?;
-            let menu = Menu::with_items(app, &[&quit_icon, &show_icon])?;
-            let _tray = tauri::tray::TrayIconBuilder::new()
-                .menu(&menu)
-                .icon(app.default_window_icon().unwrap().clone())
-                .on_menu_event(|app, event| match event.id().as_ref() {
-                    "quit" => {
-                        app.exit(0);
-                    }
-                    "show" => {
-                        // ウィンドウの作成
-                        let window = app.get_webview_window("clock").unwrap();
-
-                        if window.is_visible().unwrap() {
-                            window.hide().unwrap();
-                        } else {
-                            move_window_top_right(&window);
-                            window.show().unwrap();
-                        }
-                    }
-                    _ => {}
-                })
-                .build(app)?;
+            // システムトレイのアイコンの初期化
+            systemtray::init_systemtray(app)?;
 
             Ok(())
         })

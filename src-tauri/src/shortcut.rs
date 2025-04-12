@@ -8,7 +8,7 @@ use tauri_plugin_global_shortcut::{Code, Modifiers, Shortcut, ShortcutState};
 
 use crate::feature::ClockWindow;
 
-pub fn init_shortcuts<'a>(app: &mut App) {
+pub fn init_shortcuts<'a>(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
     let app_handle = app.handle().clone();
 
     // ショートカットの初期化
@@ -20,6 +20,8 @@ pub fn init_shortcuts<'a>(app: &mut App) {
     );
 
     register_jutoku_shortcuts(app, vec![shortcut_clock]);
+
+    Ok(())
 }
 
 fn register_jutoku_shortcuts(app: &App, jutoku_shortcuts: Vec<JutokuShortcut>) {
