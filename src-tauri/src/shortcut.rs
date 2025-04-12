@@ -10,14 +10,15 @@ use crate::feature::ClockWindow;
 
 pub fn init_shortcuts<'a>(app: &mut App) {
     let app_handle = app.handle().clone();
+
+    // ショートカットの初期化
     let shortcut_clock = JutokuShortcut::new(
         vec![Shortcut::new(Some(Modifiers::ALT), Code::ArrowLeft)],
         move || {
-            println!("ClockWindow test function called.");
-            // ここに処理を記述
             ClockWindow::run(&app_handle).unwrap();
         },
     );
+
     register_jutoku_shortcuts(app, vec![shortcut_clock]);
 }
 
