@@ -22,7 +22,7 @@
       {
         "label": "clock",
         "title": "time",
-        "width": 210,
+        "width": 215,
         "height": 118,
         "skipTaskbar": true,
         "decorations": false,
